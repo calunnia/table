@@ -1,25 +1,40 @@
 import { createServer, Model } from 'miragejs';
 
+let data1 = [];
 let data = [
   {
-    name: 'Kovács Béla',
-    pets: [
-      { name: "Bodri", animal: "dog", isVaccinated: false },
-      { name: "Cirmi", animal: "cat", isVaccinated: false }
-    ]
-  },
-  {
-    name: 'Varga Lajos',
-    pets: [
-      { name: "Frakk", animal: "dog", isVaccinated: false }
-    ]
-  },
-  {
-    name: 'Nagy Béla',
-    pets: [
-      { name: "Csőrike", animal: "pigeon", isVaccinated: false }
-    ]
+   "id" : 1,
+   "name" : "DeviceToLovePopó",
+   "status" : "working",
+   "batteryDto": {
+    "id" : 1,
+    "name" : "battery1",
+    "voltage" : 3.7,
+    "colorcode" : "#008000"
   }
+  },
+  {
+    "id" : 2,
+   "name" : "Device2",
+   "status" : "working",
+   "batteryDto": {
+     "id" : 1,
+     "name" : "battery2",
+     "voltage" : 3.6,
+     "colorcode" : "#FF0000"
+   }
+},
+{
+    "id" : 3,
+   "name" : "Device3",
+   "status" : "Not Responding",
+   "batteryDto": {
+     "id" : 1,
+     "name" : "battery2",
+     "voltage" : null,
+     "colorcode" : "#FF8000"
+   }
+}
 ]
 
 export function makeServer({ environment = 'test' } = {}) {
@@ -33,9 +48,10 @@ export function makeServer({ environment = 'test' } = {}) {
       this.namespace = '/api';
       this.timing = 2000
 
-      this.get('clients', (schema, request) => {
+      this.get('/deviceOverView/page', (schema, request) => {
         const search = request.queryParams.search
-        return data.filter(client => client.name.includes(search))
+       // return data.filter(client => client.name.includes(search))
+       return data;
       });
 
       this.post('/pets', (schema, request) => {
