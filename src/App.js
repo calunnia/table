@@ -35,15 +35,13 @@ const App = () => {
   return (
     <div className="App">
         <h1>Devices</h1>
-        {loading
-           ? <Loading/>
-           : data === null
-               ? <p>Upps Something happend</p>
-               : < Devices data = {data}/>
-
-}
-
-
+             {    (data === null)
+                        ? <p>Upps something happend</p>
+                        : loading 
+                                  ? <Loading/>
+                                   : <Devices data = {data} />
+             }
+             
 
     </div>
   );
